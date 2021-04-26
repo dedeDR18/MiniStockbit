@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_splash">
+
+    <fragment
+        android:id="@+id/nav_watchlist"
+        android:name="com.example.ministockbit.ui.watchlist.WatchlistFragment"
+        android:label="@string/text_watchlist"
+        tools:layout="@layout/fragment_watchlist" />
+
+    <fragment
+        android:id="@+id/nav_stream"
+        android:name="com.example.ministockbit.ui.stream.StreamFragment"
+        android:label="@string/text_stream"
+        tools:layout="@layout/fragment_stream" />
+
+    <fragment
+        android:id="@+id/nav_search"
+        android:name="com.example.ministockbit.ui.search.SearchFragment"
+        android:label="@string/text_search"
+        tools:layout="@layout/fragment_search" />
+
+    <fragment
+        android:id="@+id/nav_chat"
+        android:name="com.example.ministockbit.ui.chat.ChatFragment"
+        android:label="@string/text_chat"
+        tools:layout="@layout/fragment_chat"
+        />
+
+    <fragment
+        android:id="@+id/nav_portofolio"
+        android:name="com.example.ministockbit.ui.portofolio.PortofolioFragment"
+        android:label="@string/text_Portofolio"
+        tools:layout="@layout/fragment_portofolio"
+        />
+
+    <fragment
+        android:id="@+id/nav_splash"
+        android:name="com.example.ministockbit.ui.splash.SplashFragment"
+        android:label="@string/text_splash"
+        tools:layout="@layout/fragment_splash"
+
+        >
+        <action
+            android:id="@+id/action_nav_splash_to_nav_login"
+            app:destination="@id/nav_login" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_login"
+        android:name="com.example.ministockbit.ui.login.LoginFragment"
+        android:label="@string/text_login"
+        tools:layout="@layout/fragment_login"
+        />
+
+</navigation>
