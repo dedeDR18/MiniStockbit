@@ -13,18 +13,14 @@ import androidx.navigation.Navigation
 import com.airbnb.lottie.LottieAnimationView
 import com.example.ministockbit.MainActivity
 import com.example.ministockbit.R
+import com.example.ministockbit.databinding.FragmentSplashBinding
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [SplashFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class SplashFragment : Fragment() {
+
+    private var _binding: FragmentSplashBinding? = null
+    private val binding get() = _binding!!
+
 
     lateinit var navController: NavController
 
@@ -38,25 +34,23 @@ class SplashFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val v: View = inflater.inflate(R.layout.fragment_splash, container, false)
-        return v
+        _binding = FragmentSplashBinding.inflate(inflater, container, false)
+        val view = binding.root
+        return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-       // (activity as MainActivity).setDrawerLocked(true)
-
         navController = Navigation.findNavController(view)
-        val splash = view.findViewById<LottieAnimationView>(R.id.animation_splash)
 
-        splash.addAnimatorListener(object : Animator.AnimatorListener{
+        binding.animationSplash.addAnimatorListener(object : Animator.AnimatorListener{
             override fun onAnimationStart(animation: Animator?) {
 
             }
 
             override fun onAnimationEnd(animation: Animator?) {
-                    navController!!.navigate(R.id.action_nav_splash_to_nav_login)
+                navController.navigate(R.id.action_nav_splash_to_nav_login)
             }
 
             override fun onAnimationCancel(animation: Animator?) {
@@ -73,11 +67,16 @@ class SplashFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         (activity as AppCompatActivity).supportActionBar?.hide()
-        (activity as MainActivity).bottomNavView.visibility = View.GONE
+        (activity as MainActivity).setBottomNavViewVisibility(false)
     }
 
     override fun onStop() {
         super.onStop()
         (activity as AppCompatActivity).supportActionBar?.show()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

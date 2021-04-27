@@ -19,11 +19,20 @@
     <string name="text_splash">Splash</string>
     <string name="text_login">Login</string>
 
+    <string name="text_login_with_google">Masuk dengan Google</string>
+    <string name="text_login_with_facebook">Masuk dengan Facebook</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="text_more">MORE</string>
     <string name="text_social">SOCIAL</string>
     <string name="text_trade">TRADE</string>
+    <string name="text_sign_up_button">Belum punya akun? Daftar sekarang</string>
+    <string name="text_toast_fingerprint_button">button login with fingerprint</string>
+    <string name="text_toast_forget_password_button">button forget password</string>
+    <string name="text_toast_google_button">button login google</string>
+    <string name="text_toast_facebook_button">button login facebook</string>
+    <string name="text_toast_sign_up_button">button  Sign Up</string>
 
 
 </resources>

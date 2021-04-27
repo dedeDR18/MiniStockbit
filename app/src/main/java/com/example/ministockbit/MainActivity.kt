@@ -1,7 +1,10 @@
 package com.example.ministockbit
 
+import android.app.Activity
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.Menu
+import android.view.View
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.navigation.NavigationView
@@ -13,32 +16,44 @@ import androidx.navigation.ui.setupWithNavController
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import com.example.ministockbit.databinding.ActivityMainBinding
 import com.example.ministockbit.ui.DrawerLocker
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity(), DrawerLocker {
 
+    private lateinit var binding: ActivityMainBinding
+
     private lateinit var appBarConfiguration: AppBarConfiguration
-    val drawerLayout by lazy { findViewById<DrawerLayout>(R.id.drawer_layout) }
-    val bottomNavView by lazy { findViewById<BottomNavigationView>(R.id.bottom_nav_view) }
+
+    //val bottomNavView by lazy { findViewById<BottomNavigationView>(R.id.bottom_nav_view) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
+
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
 
-        val navView: NavigationView = findViewById(R.id.nav_view)
 
         val navController = findNavController(R.id.nav_host_fragment)
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
+
         appBarConfiguration = AppBarConfiguration(setOf(
-                R.id.nav_watchlist, R.id.nav_stream, R.id.nav_search, R.id.nav_chat, R.id.nav_portofolio), drawerLayout)
+                R.id.nav_watchlist, R.id.nav_stream, R.id.nav_search, R.id.nav_chat, R.id.nav_portofolio), binding.drawerLayout)
         setupActionBarWithNavController(navController, appBarConfiguration)
-        navView.setupWithNavController(navController)
-        bottomNavView.setupWithNavController(navController)
-        drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+
+
+        binding.navView.setupWithNavController(navController)
+        binding.tagAppBar.tagContentMain.bottomNavView.setupWithNavController(navController)
+
+        binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+    }
+
+    fun setBottomNavViewVisibility(visibility: Boolean){
+        binding.tagAppBar.tagContentMain.bottomNavView.visibility = if(visibility) View.VISIBLE else View.GONE
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -54,9 +69,9 @@ class MainActivity : AppCompatActivity(), DrawerLocker {
 
     override fun setDrawerLocked(shouldLocked: Boolean) {
         if (shouldLocked){
-            drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+            binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
         } else {
-            drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
+            binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
         }
     }
 }
