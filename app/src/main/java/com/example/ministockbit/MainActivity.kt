@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.View
+import android.view.WindowManager
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.navigation.NavigationView
@@ -26,8 +27,6 @@ class MainActivity : AppCompatActivity(), DrawerLocker {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
 
-    //val bottomNavView by lazy { findViewById<BottomNavigationView>(R.id.bottom_nav_view) }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -35,9 +34,13 @@ class MainActivity : AppCompatActivity(), DrawerLocker {
         val view = binding.root
         setContentView(view)
 
-        val toolbar: Toolbar = findViewById(R.id.toolbar)
-        setSupportActionBar(toolbar)
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
 
+
+
+        val toolbar: Toolbar = findViewById(R.id.toolbar)
+
+        setSupportActionBar(toolbar)
 
         val navController = findNavController(R.id.nav_host_fragment)
 
@@ -45,8 +48,8 @@ class MainActivity : AppCompatActivity(), DrawerLocker {
                 R.id.nav_watchlist, R.id.nav_stream, R.id.nav_search, R.id.nav_chat, R.id.nav_portofolio), binding.drawerLayout)
         setupActionBarWithNavController(navController, appBarConfiguration)
 
-
         binding.navView.setupWithNavController(navController)
+
         binding.tagAppBar.tagContentMain.bottomNavView.setupWithNavController(navController)
 
         binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
@@ -68,10 +71,6 @@ class MainActivity : AppCompatActivity(), DrawerLocker {
     }
 
     override fun setDrawerLocked(shouldLocked: Boolean) {
-        if (shouldLocked){
-            binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
-        } else {
-            binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
-        }
+        binding.drawerLayout.setDrawerLockMode(if (shouldLocked) DrawerLayout.LOCK_MODE_LOCKED_CLOSED else DrawerLayout.LOCK_MODE_UNLOCKED)
     }
 }
