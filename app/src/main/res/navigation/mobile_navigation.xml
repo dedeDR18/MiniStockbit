@@ -54,6 +54,10 @@
         android:name="com.example.ministockbit.ui.login.LoginFragment"
         android:label="@string/text_login"
         tools:layout="@layout/fragment_login"
-        />
+        >
+        <action
+            android:id="@+id/action_nav_login_to_nav_watchlist"
+            app:destination="@id/nav_watchlist" />
+    </fragment>
 
 </navigation>
