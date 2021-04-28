@@ -1,21 +1,18 @@
 package com.example.ministockbit.ui.watchlist
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.core.data.Resource
+import com.example.ministockbit.R
 import com.example.ministockbit.databinding.FragmentWatchlistBinding
 import com.example.ministockbit.ui.watchlist.adapter.CryptoAdapter
 import org.koin.android.viewmodel.ext.android.viewModel
-
 
 class WatchlistFragment : Fragment() {
 
@@ -38,31 +35,42 @@ class WatchlistFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         adapterCrypto = CryptoAdapter()
 
+        initSwipeToRefresh()
+        observe()
+        initRv()
+
+    }
+
+    private fun observe(){
         watchlistViewModel.dataCrypto.observe(viewLifecycleOwner, { dataCrypto ->
             dataCrypto?.let { data ->
                 when(data){
-                    is Resource.Loading -> showLoading(true)
+                    is Resource.Loading -> showRefresh(true)
                     is Resource.Success -> {
-                        Log.d("WATCHLISTFRAGMENT", "Adanih Datanya...")
                         adapterCrypto.setData(data.data)
-                        showLoading(false)
+                        showRefresh(false)
                     }
                     is Resource.Error -> {
-                        showLoading(false)
-                        Toast.makeText(requireContext(), "error nih", Toast.LENGTH_SHORT).show()
+                        showRefresh(false)
+                        Toast.makeText(requireContext(), getString(R.string.on_error), Toast.LENGTH_SHORT).show()
                     }
                 }
             }
         })
-
-        initRv()
     }
 
-    fun showLoading(state: Boolean) = binding.pbCrypto.apply {
-        visibility = if(state) View.VISIBLE else View.GONE
+    private fun showRefresh(state: Boolean) = binding.swiperefreshLayout.apply {
+        isRefreshing = state
     }
 
-    fun initRv() = binding.rvCrypto.apply {
+    private fun initSwipeToRefresh() = binding.swiperefreshLayout.apply {
+        setOnRefreshListener {
+            isRefreshing = true
+            observe()
+        }
+    }
+
+    private fun initRv() = binding.rvCrypto.apply {
         layoutManager = LinearLayoutManager(requireContext())
         val divider = DividerItemDecoration(requireContext(), (layoutManager as LinearLayoutManager).orientation)
         setHasFixedSize(true)

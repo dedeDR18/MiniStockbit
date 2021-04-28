@@ -17,6 +17,7 @@ import androidx.navigation.ui.setupWithNavController
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.navigation.NavController
 import com.example.ministockbit.databinding.ActivityMainBinding
 import com.example.ministockbit.ui.DrawerLocker
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -27,6 +28,8 @@ class MainActivity : AppCompatActivity(), DrawerLocker {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
 
+    private lateinit var navController: NavController
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -34,11 +37,11 @@ class MainActivity : AppCompatActivity(), DrawerLocker {
         val view = binding.root
         setContentView(view)
 
-        val toolbar: Toolbar = findViewById(R.id.toolbar)
+        setSupportActionBar(binding.tagAppBar.toolbar)
 
-        setSupportActionBar(toolbar)
+        navController = findNavController(R.id.nav_host_fragment)
 
-        val navController = findNavController(R.id.nav_host_fragment)
+        changeToolbarTitle()
 
         appBarConfiguration = AppBarConfiguration(setOf(
                 R.id.nav_watchlist, R.id.nav_stream, R.id.nav_search, R.id.nav_chat, R.id.nav_portofolio), binding.drawerLayout)
@@ -59,6 +62,17 @@ class MainActivity : AppCompatActivity(), DrawerLocker {
         // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.main, menu)
         return true
+    }
+
+    private fun changeToolbarTitle(){
+        navController.addOnDestinationChangedListener{
+                controller, destination, arguments ->
+            if (navController.currentDestination!!.label!!.equals(getString(R.string.text_login))){
+                binding.tagAppBar.titleToolbar.text = getString(R.string.text_masuk)
+            } else {
+                binding.tagAppBar.titleToolbar.text = getString(R.string.text_stockbit)
+            }
+        }
     }
 
     override fun onSupportNavigateUp(): Boolean {

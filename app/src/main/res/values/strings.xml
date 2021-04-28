@@ -18,6 +18,7 @@
     <string name="text_Portofolio">Portofolio</string>
     <string name="text_splash">Splash</string>
     <string name="text_login">Login</string>
+    <string name="text_stockbit">Stockbit</string>
 
     <string name="text_login_with_google">Masuk dengan Google</string>
     <string name="text_login_with_facebook">Masuk dengan Facebook</string>
@@ -33,6 +34,8 @@
     <string name="text_toast_google_button">button login google</string>
     <string name="text_toast_facebook_button">button login facebook</string>
     <string name="text_toast_sign_up_button">button  Sign Up</string>
+    <string name="on_error">Terjadi Kesalahan...</string>
+    <string name="text_masuk">Masuk</string>
 
 
 </resources>
