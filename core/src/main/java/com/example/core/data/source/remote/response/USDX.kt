@@ -31,7 +31,7 @@ data class USDX(
     val OPENDAY: Double,
     val OPENHOUR: Double,
     val PRICE: Double,
-    val SUPPLY: Int,
+    val SUPPLY: Double,
     val TOPTIERVOLUME24HOUR: Double,
     val TOPTIERVOLUME24HOURTO: Double,
     val TOSYMBOL: String,

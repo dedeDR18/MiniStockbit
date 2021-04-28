@@ -13,7 +13,7 @@ data class CoinInfo(
     val Internal: String,
     val MaxSupply: Double,
     val Name: String,
-    val NetHashesPerSecond: Long,
+    val NetHashesPerSecond: Double,
     val ProofType: String,
     val Rating: Rating,
     val Type: Int,

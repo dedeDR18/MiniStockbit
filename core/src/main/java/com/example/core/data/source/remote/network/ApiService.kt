@@ -14,7 +14,7 @@ import retrofit2.http.Query
  */
 
 interface ApiService {
-    @Headers("x-api-key : ${BuildConfig.API_KEY}")
+    @Headers("authorization: Apikey{${BuildConfig.API_KEY}}")
     @GET("data/top/totaltoptiervolfull?")
     suspend fun getData(
         @Query("limit") limit:Int = 50,
