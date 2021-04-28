@@ -23,8 +23,7 @@ import kotlinx.coroutines.flow.map
 
 class CryptoRepository(
     private val remoteDataSource: RemoteDataSource,
-    private val localDataSource: LocalDataSource,
-    private val appExecutors: AppExecutors
+    private val localDataSource: LocalDataSource
 ) : ICryptoRepository {
     override fun getAllCryptoData(): Flow<Resource<List<Crypto>>> =
         object : NetworkBoundResource<List<Crypto>, List<Data>>() {
