@@ -10,6 +10,7 @@ import com.example.core.data.source.remote.network.ApiService
 import com.example.core.domain.repository.ICryptoRepository
 
 import net.sqlcipher.database.SupportFactory
+import okhttp3.CertificatePinner
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.android.ext.koin.androidContext
@@ -44,10 +45,17 @@ val databaseModule = module {
 
 val networkModule = module {
     single {
+        val hostName = "min-api.cryptocompare.com"
+        val certificatePinner = CertificatePinner.Builder()
+            .add(hostName, "sha256/Xd+EsIDqyqDn1x3n0JYVVar+W73w1U0GxC8uZa6/QTk=")
+            .add(hostName, "sha256/8Rw90Ej3Ttt8RRkrg+WYDS9n7IS03bk5bjP/UXPtaY8=")
+            .add(hostName, "sha256/Ko8tivDrEjiY90yGasP6ZpBU4jwXvHqVvQI0GS3GNdA=")
+            .build()
         OkHttpClient.Builder()
             .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
             .connectTimeout(120, TimeUnit.SECONDS)
             .readTimeout(120, TimeUnit.SECONDS)
+            .certificatePinner(certificatePinner)
             .build()
     }
 
