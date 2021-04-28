@@ -34,10 +34,6 @@ class MainActivity : AppCompatActivity(), DrawerLocker {
         val view = binding.root
         setContentView(view)
 
-        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-
-
-
         val toolbar: Toolbar = findViewById(R.id.toolbar)
 
         setSupportActionBar(toolbar)
