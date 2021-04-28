@@ -1,5 +1,6 @@
 package com.example.core.di
 
+import android.database.sqlite.SQLiteDatabase
 import androidx.room.Room
 import com.example.core.data.source.CryptoRepository
 import com.example.core.data.source.local.LocalDataSource
@@ -7,7 +8,8 @@ import com.example.core.data.source.local.room.CryptoDatabase
 import com.example.core.data.source.remote.RemoteDataSource
 import com.example.core.data.source.remote.network.ApiService
 import com.example.core.domain.repository.ICryptoRepository
-import com.example.core.utils.AppExecutors
+
+import net.sqlcipher.database.SupportFactory
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.android.ext.koin.androidContext
@@ -28,11 +30,15 @@ val databaseModule = module {
         get<CryptoDatabase>().cryptoDao()
     }
     single {
+        val pass : ByteArray = net.sqlcipher.database.SQLiteDatabase.getBytes("ministockbit".toCharArray())
+        val factory = SupportFactory(pass)
         Room.databaseBuilder(
             androidContext(),
             CryptoDatabase::class.java,
             "Crypto.db"
-        ).fallbackToDestructiveMigration().build()
+        ).fallbackToDestructiveMigration()
+            .openHelperFactory(factory)
+            .build()
     }
 }
 
