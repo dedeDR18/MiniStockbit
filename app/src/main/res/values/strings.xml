@@ -36,6 +36,11 @@
     <string name="text_toast_sign_up_button">button  Sign Up</string>
     <string name="on_error">Terjadi Kesalahan...</string>
     <string name="text_masuk">Masuk</string>
+    <string name="stream_btc">BTC</string>
+    <string name="stream_bitcoin">Bitcoin</string>
+    <string name="stream_coinbase">Coinbase</string>
+    <string name="stream_ltc">LTC</string>
+    <string name="stream_litecoin">Litecoin</string>
 
 
 </resources>

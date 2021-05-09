@@ -5,15 +5,101 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="16dp"
     tools:context=".ui.stream.StreamFragment">
 
-    <TextView
-        android:layout_centerInParent="true"
-        android:id="@+id/text_stream"
-        android:text="@string/text_stream"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="20sp"
-         />
+
+    <RelativeLayout
+        android:id="@+id/btc_layout"
+        android:layout_marginBottom="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:textColor="@color/black"
+            android:id="@+id/tv_btc"
+            android:textStyle="bold"
+            android:text="@string/stream_btc"
+            android:textSize="24sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:id="@+id/tv_btc_name"
+            android:layout_below="@id/tv_btc"
+            android:text="@string/stream_bitcoin"
+            android:textSize="18sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:textColor="@color/green_stockbit"
+            android:layout_alignParentEnd="true"
+            android:id="@+id/tv_price_btc"
+            tools:text="1123"
+            android:layout_marginBottom="4dp"
+            android:textSize="20sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:layout_alignParentEnd="true"
+            android:id="@+id/tv_btc_market"
+            android:layout_below="@id/tv_price_btc"
+            android:text="@string/stream_coinbase"
+            android:textSize="18sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/ltc_layout"
+        android:layout_below="@id/btc_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:textColor="@color/black"
+            android:id="@+id/tv_ltc"
+            android:textStyle="bold"
+            android:text="@string/stream_ltc"
+            android:textSize="24sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:id="@+id/tv_ltc_name"
+            android:layout_below="@id/tv_ltc"
+            android:text="@string/stream_litecoin"
+            android:textSize="18sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:textColor="@color/green_stockbit"
+            android:layout_alignParentEnd="true"
+            android:id="@+id/tv_price_ltc"
+            tools:text="1123"
+            android:layout_marginBottom="4dp"
+            android:textSize="20sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:layout_alignParentEnd="true"
+            android:id="@+id/tv_ltc_market"
+            android:layout_below="@id/tv_price_ltc"
+            android:text="@string/stream_coinbase"
+            android:textSize="18sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    </RelativeLayout>
+
+
+
+
+
+
+
 </RelativeLayout>
 </layout>

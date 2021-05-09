@@ -2,6 +2,8 @@ package com.example.core.domain.usecase
 
 import com.example.core.data.Resource
 import com.example.core.domain.model.Crypto
+import com.example.core.domain.model.WebsocketResponse
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
 
 /**
@@ -13,4 +15,6 @@ import kotlinx.coroutines.flow.Flow
 
 interface CryptoUseCase {
     fun getAllCryptoData() : Flow<Resource<List<Crypto>>>
+    fun getDataCoin(cs: CoroutineScope) : Flow<WebsocketResponse>
+
 }
